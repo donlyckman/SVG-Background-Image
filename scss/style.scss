@@ -1,0 +1,218 @@
+@import url( 'https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+// Convert hex color to uri encoded color for embedded svg files
+@function svg-color($hexcolor) {
+     @return'%23' + str-slice($hexcolor, 2);
+}
+// Add mime type to svg data
+@function svg-encode($svg) {
+     @return 'data:image/svg+xml,' + svg-fix-quotes($svg);
+}
+// url encode quotes
+@function svg-fix-quotes($svg) {
+    $search: '"';
+    $replace: '%22';
+    $index: str-index($svg, $search);
+    @if $index {
+         @return str-slice($svg, 1, $index - 1) + $replace + svg-fix-quotes(str-slice($svg, $index + str-length($search)));
+    }
+    @return $svg;
+}
+// Site Settings
+$primary-color: #00447c;
+$secondary-color: #559900;
+$max-width: 1200px; // SVG SETTINGS
+$svg-fill-primary: svg-color('#00447c');
+$svg-fill-secondary: svg-color('#559900'); // SVG FILES
+$mySVG: svg-encode('<?xml version="1.0" encoding="utf-8"?> <svg version="1.1" id="bitObject" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 325.3 328" style="enable-background:new 0 0 325.3 328;" xml:space="preserve"> <style type="text/css"> .st0{fill:'+ $svg-fill-secondary +';} .st1{fill:' + $svg-fill-primary +';} </style> <path id="bitCenter" class="st0" d="M161.9,164.5V328h163.4V164.5H161.9z M265.9,266.4h-40.4V226h40.4V266.4z"/> <path id="bitCenter_1_" class="st1" d="M-1.6,0v163.4h163.4V0H-1.6z M102.5,101.9H62.1V61.5h40.4V101.9z"/> <rect id="bitLeft" x="62.1" y="227.1" class="st0" width="40.4" height="40.4"/> <rect id="bitTop" x="228.8" y="61.5" class="st0" width="40.4" height="40.4"/> </svg>');
+$waveSVG: svg-encode('<svg version="1.1" id="wave-object" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 90" style="enable-background:new 0 0 600 90;" xml:space="preserve" preserveAspectRatio="xMinYMax slice"> <style type="text/css"> .st0{fill:'+ $svg-fill-primary +';} </style> <path id="wave-path_1_" class="st0" d="M0,75.2c301.3-74.7,305.3,57.2,600,0V0H0V75.2z"/> </svg>');
+$curveConvexSVG: svg-encode('<svg version="1.1" id="curveConvexObj" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 90" style="enable-background:new 0 0 600 90;" xml:space="preserve" preserveAspectRatio="xMinYMax slice"> <style type="text/css"> .st0{fill:'+ $svg-fill-primary +';} </style> <path id="curveConvexPath" class="st0" d="M300,72c117.4,0,223.6,6.9,299.8,18V0h-600v90C76,78.9,182.4,72,300,72z"/> </svg>');
+$curveSVG: svg-encode('<svg version="1.1" id="curveObj" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 90" style="enable-background:new 0 0 600 90;" xml:space="preserve" preserveAspectRatio="xMinYMax slice"> <style type="text/css"> .st0{fill:'+ $svg-fill-primary +';} </style> <path id="curvePath" class="st0" d="M299.6,90C182.1,90,76,83.1-0.2,72V0h600v72C523.5,83.1,417.2,90,299.6,90z"/> </svg>');
+$wedgeSVG: svg-encode('<svg version="1.1" id="wedgeObj" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 90" style="enable-background:new 0 0 600 90;" xml:space="preserve" preserveAspectRatio="xMinYMax slice"> <style type="text/css"> .st0{fill:'+ $svg-fill-primary +';} </style> <polygon id="wedgePath" class="st0" points="-0.2,90 -0.2,0 599.8,0 599.8,49 "/> </svg>');
+$curveConvexDuoSVG: svg-encode('<svg version="1.1" id="wedgeObj" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 90" style="enable-background:new 0 0 600 90;" xml:space="preserve" preserveAspectRatio="xMinYMax slice"> <style type="text/css"> .st0{fill:'+ $svg-fill-secondary +';} .st1{fill:'+ $svg-fill-primary +';} </style> <path id="wedgePath2" class="st0" d="M599.8,90V0l-600,0v49C449.6,49,599.8,90,599.8,90z"/> <path id="wedgePath1" class="st1" d="M-0.2,90V0h600v49C150,49-0.2,90-0.2,90z"/> </svg>');
+$jaggedSVG: svg-encode('<svg version="1.1" id="wedgeObj" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 90" style="enable-background:new 0 0 600 90;" xml:space="preserve" preserveAspectRatio="none"> <style type="text/css"> .st0{fill:'+ $svg-fill-primary +';} </style> <polygon id="wedgePath" class="st0" points="578,9 568,2 463,31 447,16 423,25 333,5 319,22 114,-1 101,17 92,11 41,43 0,0 0,47 0,43 0,90 22,81 32,88 137,59 153,74 177,65 267,85 281,68 486,91 499,73 508,79 559,47 600,90 600,43 600,47 600,0 "/> </svg>');
+$waveTopSVG: svg-encode('<svg version="1.1" id="waveTop-object" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 90" style="enable-background:new 0 0 600 90;" xml:space="preserve" preserveAspectRatio="none"> <style type="text/css"> .st0{fill:'+ $svg-fill-secondary +';} </style> <path id="wave-path_1_" class="st0" d="M600,14.8c-301.3,74.7-305.3-57.2-600,0V90h600V14.8z"/> </svg>');
+$waveTopPrimeSVG: svg-encode('<svg version="1.1" id="waveTop-object" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 90" style="enable-background:new 0 0 600 90;" xml:space="preserve" preserveAspectRatio="none"> <style type="text/css"> .st0{fill:'+ $svg-fill-primary +';} </style> <path id="wave-path_1_" class="st0" d="M600,14.8c-301.3,74.7-305.3-57.2-600,0V90h600V14.8z"/> </svg>');
+$sawSVG: svg-encode('<svg version="1.1" id="sawObj" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 600 600" style="enable-background:new 0 0 600 600;" xml:space="preserve" preserveAspectRatio="none"> <style type="text/css"> .st0{fill:'+ $svg-fill-primary +';} </style> <path class="st0" d="M599.6,409.2V238.7c-8.5,7-17.2,13.8-26,20.3l-3.3-28.1c-21.2,16-43.1,30.6-65.2,44.4l-2.1-28.4 c-21.8,13.7-44,26.5-66.5,38.6l-1.3-28.5c-22.2,12.1-44.7,23.5-67.4,34.2l-0.6-28.6c-22.5,10.7-45.2,20.9-68.1,30.4v-28.6 c-22.7,9.5-45.6,18.5-68.7,26.8l0.6-28.6c-22.9,8.3-46,16-69.3,22.9l1.3-28.5c-23.1,6.9-46.3,13.1-69.9,18.3l2.1-28.4 c-23.2,5.2-46.7,9.5-70.6,12.2l3.5-33.3l-28.6,13v170.5c8.3-6.8,16.6-13.3,25.1-19.6l3.3,28.1c21.2-16,43.1-30.6,65.2-44.4l2.1,28.4 c21.8-13.7,44-26.5,66.5-38.6l1.3,28.5c22.2-12.1,44.7-23.5,67.4-34.2l0.6,28.6c22.5-10.7,45.2-20.9,68.1-30.4v28.6 c22.7-9.5,45.6-18.5,68.7-26.8l-0.6,28.6c22.9-8.3,46-16,69.3-22.9l-1.3,28.5c23.1-6.9,46.3-13.1,69.9-18.3l-2.1,28.4 c23.2-5.2,46.7-9.5,70.6-12.2l-3.3,28.1C580,416.6,589.8,409.7,599.6,409.2z"/> </svg>');
+
+.svgTest {
+    border: 1px solid #ccc;
+    padding: 25px;
+    margin: 25px auto;
+    background-color: #005599;
+    background: url($mySVG),linear-gradient(to bottom, rgba(30,87,153,1) 0%,rgba(41,137,216,1) 50%,rgba(32,124,202,1) 51%,rgba(125,185,232,1) 100%);
+    background-size: 64px,100%;
+    height: 300px;
+    width: 300px;
+}
+
+.callouts {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    background: #f1f1f1;
+    padding: 25px 15px;
+    position: relative;
+    flex-flow: row wrap;
+
+    & > article {
+        flex: 1 1 0;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 5px 0 #ccc;
+        padding: 10px;
+        margin-right: 10px;
+        min-width: 180px;
+        max-width: 300px;
+        text-align: center;
+        background-color: #eee;
+        min-height: 350px;
+        position: relative;
+        margin-bottom: 10px;
+        border-bottom: 10px solid #00447c;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 900;
+            line-height: 20px;
+            color: #fff;
+        }
+
+        p {
+            line-height: 14px;
+        }
+
+        .subheading {
+            color: #fff;
+        }
+
+        .content {
+            color: #000;
+            position: absolute;
+            top: 40%;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            overflow: hidden;
+            padding: 35px 15px;
+
+            button {
+                padding: 10px;
+                border: none;
+                color: #fff;
+                box-shadow: 0 0 5px rgba(0,0,0,.5);
+                border-radius: 5px;
+                background: rgba(85, 153, 0,1);
+                position: absolute;
+                bottom: 20px;
+                left: 15%;
+                width: 70%;
+            }
+        }
+
+        &.cta1 {
+            background: url($waveSVG),linear-gradient(to bottom, rgba(0, 68, 124,1) 0%,rgba(0, 68, 124,1) 40%,rgba(0, 68, 124,0) 40%);
+            background-position: center 40%, 0;
+            background-repeat: repeat-x, no-repeat;
+            background-size: 50% auto,auto;
+        }
+
+        &.cta2 {
+            background: url($curveConvexSVG),linear-gradient(to bottom, rgba(0, 68, 124,1) 0%,rgba(0, 68, 124,1) 40%,rgba(0, 68, 124,0) 40%);
+            background-position: center 40%, 0;
+            background-repeat: repeat-x, no-repeat;
+            background-size: auto,auto;
+        }
+
+        &.cta3 {
+            background: url($curveSVG),linear-gradient(to bottom, rgba(0, 68, 124,1) 0%,rgba(0, 68, 124,1) 40%,rgba(0, 68, 124,0) 40%);
+            background-position: center 40%, 0;
+            background-repeat: repeat-x, no-repeat;
+            background-size: auto,auto;
+        }
+
+        &.cta4 {
+            background: url($sawSVG),linear-gradient(to bottom, rgba(0, 68, 124,1) 0%,rgba(0, 68, 124,1) 40%,rgba(0, 68, 124,0) 40%);
+            background-position: center 25%, 0;
+            background-repeat: repeat-x, no-repeat;
+            background-size: 100% 150px,auto;
+        }
+
+        &.cta5 {
+            background: url($curveConvexDuoSVG),linear-gradient(to bottom, rgba(0, 68, 124,1) 0%,rgba(0, 68, 124,1) 40%,rgba(0, 68, 124,0) 40%);
+            background-position: center 40%, 0;
+            background-repeat: repeat-x, no-repeat;
+            background-size: auto,auto;
+        }
+
+        &.cta6 {
+            background: url($jaggedSVG),linear-gradient(to bottom, rgba(0, 68, 124,1) 0%,rgba(0, 68, 124,1) 37%,rgba(0, 68, 124,0) 37%);
+            background-position: center 35%, 0;
+            background-repeat: repeat-x, no-repeat;
+            background-size: 100% 50px,auto;
+        }
+    }
+}
+
+.promo {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    background: url($waveTopSVG),linear-gradient(to bottom, #f1f1f1 0, #f1f1f1 50px, $secondary-color 50px, $secondary-color 100%);
+    background-size: 100% 50px,auto;
+    background-position: center top, auto;
+    background-repeat: no-repeat, no-repeat;
+    padding: 25px 15px;
+    position: relative;
+    flex-flow: row nowrap;
+
+    > article {
+        flex: 1 1 0;
+        padding: 10px;
+        margin-right: 10px;
+        min-width: 50%;
+        max-width: 50%;
+        text-align: center;
+        min-height: 200px;
+        position: relative;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+}
+
+.news {
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    background: url($jaggedSVG),linear-gradient(to bottom, $secondary-color 0, $secondary-color 40px, $primary-color 40px, $primary-color 100%);
+    background-size: 100% 80px,auto;
+    background-position: center top, auto;
+    background-repeat: no-repeat, no-repeat;
+    padding: 25px 15px;
+    position: relative;
+    flex-flow: row nowrap;
+
+    > article {
+        flex: 1 1 0;
+        padding: 10px;
+        margin-right: 10px;
+        min-width: 50%;
+        max-width: 50%;
+        text-align: center;
+        min-height: 200px;
+        position: relative;
+        margin-bottom: 10px;
+        color: #fff;
+    }
+}
